@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roxana Stanescu</title>
+<meta name="description" content="Roxana Stanescu, computer science student at the University of Washington. Software engineering at Chewy, machine learning research at Seattle Children's Hospital.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+  :root {
+    --bg: #fdfdfc;
+    --text: #1d1d1b;
+    --muted: #6b6b66;
+    --rule: #e4e4e0;
+    --link: #1f4fa8;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #161615;
+      --text: #e6e5e1;
+      --muted: #9c9b96;
+      --rule: #2e2e2b;
+      --link: #8fb3f0;
+    }
+  }
+  html { background: var(--bg); }
+  body {
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 64px 20px 80px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  a { color: var(--link); text-underline-offset: 2px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  h1 { font-size: 30px; font-weight: 600; margin: 0 0 4px; line-height: 1.2; }
+  h2 {
+    font-size: 15px; font-weight: 600; margin: 48px 0 16px;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+  }
+  h3 { font-size: 18px; font-weight: 600; margin: 0; }
+  p { margin: 0 0 16px; }
+  .sub { color: var(--muted); margin: 0 0 18px; }
+  .links { margin: 0 0 32px; }
+  .links a { margin-right: 14px; white-space: nowrap; }
+  .entry { margin-bottom: 32px; }
+  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .date { color: var(--muted); font-size: 16px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .where { color: var(--muted); font-style: italic; margin: 0 0 8px; }
+  ul.projects { list-style: none; padding: 0; margin: 0; }
+  ul.projects li { margin-bottom: 22px; }
+  .note { font-style: italic; }
+  figure { margin: 20px 0 8px; }
+  figure .pair { display: flex; gap: 28px; flex-wrap: wrap; }
+  figure .pair div { text-align: center; font-size: 15px; color: var(--muted); }
+  figure svg { width: 120px; height: auto; display: block; }
+  figure svg .gt { fill: none; stroke: var(--muted); stroke-width: 1.3; stroke-dasharray: 4 3; }
+  figure svg .pred { fill: none; stroke: var(--text); stroke-width: 1.3; }
+  figure svg .ov { fill: var(--text); fill-opacity: 0.14; }
+  figcaption { font-size: 15px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 48px 0 20px; }
+  footer { font-size: 15px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<h1>Roxana Stanescu</h1>
+<p class="sub">Computer science at the University of Washington, Seattle</p>
+<p class="links">
+  <a href="mailto:rstanz@uw.edu">rstanz@uw.edu</a>
+  <a href="https://www.linkedin.com/in/roxana--stanescu">LinkedIn</a>
+  <a href="https://github.com/roxana-stanescu">GitHub</a>
+  <a href="Roxana_Stanescu_Resume.pdf">Resume (PDF)</a>
+</p>
+
+<p>I'm a sophomore in the Paul G. Allen School at UW. This fall I'm a software engineering co-op at Chewy, working on the systems behind inbound supply chain. Since 2023 I've also done machine learning research in the radiology department at Seattle Children's Hospital.</p>
+<p>I'm looking for software engineering internships. The best way to reach me is email.</p>
+
+<h2>Experience</h2>
+
+<div class="entry">
+  <div class="entry-head"><h3>Chewy</h3><span class="date">Jun – Dec 2026</span></div>
+  <p class="where">Software Engineering Co-op, Inbound Technology &amp; Supply Chain</p>
+  <p>Chewy sends chargeback notices to vendors, and once one goes out it can't be pulled back. I built a simulation feature (Java/Spring Boot, React) that renders each generated notice for stakeholders to review before it sends, and designed the PostgreSQL tables that track a chargeback through the whole workflow, which gave compliance an audit trail they didn't have before.</p>
+  <p>I also led moving our chargeback email orchestration onto Chewy's central notification platform, with scheduling on AWS EventBridge. Onboarding a new compliance client went from three weeks to one.</p>
+</div>
+
+<div class="entry">
+  <div class="entry-head"><h3>Seattle Children's Hospital</h3><span class="date">Sep 2023 – present</span></div>
+  <p class="where">Undergraduate ML Researcher, Department of Radiology</p>
+  <p>I build segmentation models that measure stool burden in pediatric abdominal X-rays. I wrote the PyTorch preprocessing, training and evaluation pipeline and benchmarked UNet++ and EfficientNet models on 735 annotated images. Resolution scaling and ensembling raised validation Dice from 0.32 to 0.67. Across 889 cases, the model's output correlates with radiologists' Leech and Likert ratings (Pearson r = 0.61–0.64, p &lt; 0.001). The model runs as a Gradio demo on Hugging Face.</p>
+  <figure>
+    <div class="pair">
+      <div>
+        <svg viewBox="0 0 130 100" role="img" aria-label="Overlap at Dice 0.32">
+          <defs><clipPath id="a"><circle cx="42.36" cy="50" r="40"/></clipPath></defs>
+          <circle class="ov" cx="87.64" cy="50" r="40" clip-path="url(#a)"/>
+          <circle class="gt" cx="42.36" cy="50" r="40"/>
+          <circle class="pred" cx="87.64" cy="50" r="40"/>
+        </svg>
+        Dice 0.32
+      </div>
+      <div>
+        <svg viewBox="0 0 130 100" role="img" aria-label="Overlap at Dice 0.67">
+          <defs><clipPath id="b"><circle cx="54.51" cy="50" r="40"/></clipPath></defs>
+          <circle class="ov" cx="75.49" cy="50" r="40" clip-path="url(#b)"/>
+          <circle class="gt" cx="54.51" cy="50" r="40"/>
+          <circle class="pred" cx="75.49" cy="50" r="40"/>
+        </svg>
+        Dice 0.67
+      </div>
+    </div>
+    <figcaption>What that improvement means: radiologist annotation (dashed) vs. model prediction (solid), with the shaded overlap drawn to scale for each score.</figcaption>
+  </figure>
+</div>
+
+<h2>Projects</h2>
+<ul class="projects">
+  <li>
+    <div class="entry-head"><h3>PAWS</h3><span class="date">Jul 2026</span></div>
+    A Next.js app that uses an LLM to recommend products from a customer's purchase history. <span class="note">2nd place in the Chewy AI Hackathon intern cohort; presented to 200+ people, including the org's VP.</span>
+  </li>
+  <li>
+    <div class="entry-head"><h3>Spendify</h3><span class="date">Oct 2025</span></div>
+    A budgeting app for students, built inside Jira with Atlassian Forge, React and Node.js. It categorizes expenses, charts monthly spending, and has a Rovo AI chatbot that reads your spending history and suggests where to cut back. <span class="note">2nd of 40+ teams in the Atlassian track at DubHacks 2025.</span>
+  </li>
+  <li>
+    <div class="entry-head"><h3>NOMM</h3><span class="date">Jan – Jun 2025</span></div>
+    A Flutter app for finding and reviewing restaurants with friends: groups, star ratings, and photo reviews pinned on a map. Firestore and Firebase Auth handle real-time sync for 1,000+ concurrent users.
+  </li>
+</ul>
+
+<h2>Outside of work</h2>
+<p>In 2020 I started the <strong>Forgotten Faces Foundation</strong>, a student-led nonprofit for children in rural Romania. We've raised over $20,000, and with a team of 20+ volunteers we send clothing, school supplies and educational trips to more than 200 kids a year. The work earned national awards from the Romanian American Cultural Society in 2023 and 2024. I'm fluent in Romanian and hold the Washington State Seal of Biliteracy.</p>
+<p>I'm also an assistant tennis coach at Pine Lake Athletic Club. Otherwise I'm usually hiking, reading, or baking something.</p>
+
+<h2>Skills</h2>
+<p><strong>Languages:</strong> Java, Python, TypeScript/JavaScript, C, C#, Dart, SQL<br>
+<strong>Frameworks:</strong> Spring Boot, React, Next.js, Node.js, PyTorch, TensorFlow, .NET, Flutter<br>
+<strong>Infrastructure:</strong> AWS (Lambda, SQS, SNS, EventBridge), Azure, GCP, PostgreSQL, Firebase, Terraform, Jenkins</p>
+
+<hr>
+<footer>B.S. Computer Science, University of Washington, expected June 2028. Last updated September 2026.</footer>
+
+</body>
+</html>
