@@ -7,146 +7,459 @@
 <meta name="description" content="Roxana Stanescu, computer science student at the University of Washington. Software engineering at Chewy, machine learning research at Seattle Children's Hospital.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
 <style>
   :root {
-    --bg: #fdfdfc;
-    --text: #1d1d1b;
-    --muted: #6b6b66;
-    --rule: #e4e4e0;
-    --link: #1f4fa8;
-    color-scheme: light dark;
+    --bg: #ffffff;
+    --bg-2: #f6f7f8;
+    --text: #0f1113;
+    --muted: #5f666d;
+    --border: #e6e8ea;
+    --accent: #1b5cff;
+    --lightbox: #0b0e11;
+    --lightbox-text: #d9e2ea;
+    --lightbox-muted: #7d8a96;
+    --glow: #7fd4ff;
+    color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #161615;
-      --text: #e6e5e1;
-      --muted: #9c9b96;
-      --rule: #2e2e2b;
-      --link: #8fb3f0;
+      --bg: #0c0d0f;
+      --bg-2: #141619;
+      --text: #eceef0;
+      --muted: #9aa2aa;
+      --border: #24272b;
+      --accent: #6d97ff;
+      --lightbox: #050608;
+      color-scheme: dark;
     }
   }
-  html { background: var(--bg); }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    margin: 0 auto;
-    max-width: 640px;
-    padding: 64px 20px 80px;
+    margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
-    font-size: 18px;
+    font-family: "Geist", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
-  a { color: var(--link); text-underline-offset: 2px; text-decoration-thickness: 1px; }
-  a:hover { text-decoration-thickness: 2px; }
-  h1 { font-size: 30px; font-weight: 600; margin: 0 0 4px; line-height: 1.2; }
-  h2 {
-    font-size: 15px; font-weight: 600; margin: 48px 0 16px;
-    text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+  a { color: inherit; }
+  .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: "Geist Mono", ui-monospace, Menlo, monospace; }
+
+  /* Header */
+  header.top {
+    position: sticky; top: 0; z-index: 20;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--border);
   }
-  h3 { font-size: 18px; font-weight: 600; margin: 0; }
-  p { margin: 0 0 16px; }
-  .sub { color: var(--muted); margin: 0 0 18px; }
-  .links { margin: 0 0 32px; }
-  .links a { margin-right: 14px; white-space: nowrap; }
-  .entry { margin-bottom: 32px; }
-  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
-  .date { color: var(--muted); font-size: 16px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .where { color: var(--muted); font-style: italic; margin: 0 0 8px; }
-  ul.projects { list-style: none; padding: 0; margin: 0; }
-  ul.projects li { margin-bottom: 22px; }
-  .note { font-style: italic; }
-  figure { margin: 20px 0 8px; }
-  figure .pair { display: flex; gap: 28px; flex-wrap: wrap; }
-  figure .pair div { text-align: center; font-size: 15px; color: var(--muted); }
-  figure svg { width: 120px; height: auto; display: block; }
-  figure svg .gt { fill: none; stroke: var(--muted); stroke-width: 1.3; stroke-dasharray: 4 3; }
-  figure svg .pred { fill: none; stroke: var(--text); stroke-width: 1.3; }
-  figure svg .ov { fill: var(--text); fill-opacity: 0.14; }
-  figcaption { font-size: 15px; color: var(--muted); margin-top: 8px; line-height: 1.5; }
-  hr { border: 0; border-top: 1px solid var(--rule); margin: 48px 0 20px; }
-  footer { font-size: 15px; color: var(--muted); }
+  header.top .container { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+  .brand { font-weight: 600; text-decoration: none; letter-spacing: -0.01em; }
+  nav.links { display: flex; align-items: center; gap: 26px; font-size: 14px; }
+  nav.links a { text-decoration: none; color: var(--muted); }
+  nav.links a:hover { color: var(--text); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 500 14px/1 inherit; font-family: inherit;
+    padding: 10px 16px; border-radius: 8px;
+    border: 1px solid var(--border); background: var(--bg);
+    color: var(--text); text-decoration: none; cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .btn:hover { border-color: var(--text); }
+  .btn.dark { background: var(--text); color: var(--bg); border-color: var(--text); }
+  .btn.dark:hover { opacity: .88; }
+  nav.links .btn { color: var(--text); padding: 8px 14px; }
+
+  /* Hero */
+  .hero { padding: 88px 0 72px; display: grid; grid-template-columns: 1.35fr 1fr; gap: 56px; align-items: end; }
+  .hero h1 { font-size: clamp(40px, 6vw, 64px); line-height: 1.02; letter-spacing: -0.04em; font-weight: 600; margin: 0 0 22px; }
+  .hero h1 span { color: var(--muted); }
+  .hero .tagline { font-size: 20px; font-weight: 500; margin: -8px 0 18px; letter-spacing: -0.01em; }
+  .hero p.intro { font-size: 18px; color: var(--muted); max-width: 48ch; margin: 0 0 28px; }
+  .hero p.intro strong { color: var(--text); font-weight: 500; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  .now { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--bg); }
+  .now h2 { margin: 0; padding: 12px 18px; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); background: var(--bg-2); border-bottom: 1px solid var(--border); font-family: "Geist Mono", monospace; }
+  .now ul { list-style: none; margin: 0; padding: 0; }
+  .now li { padding: 14px 18px; display: grid; gap: 2px; }
+  .now li + li { border-top: 1px solid var(--border); }
+  .now b { font-weight: 500; }
+  .now span { font-size: 14px; color: var(--muted); }
+
+  /* Sections */
+  section { padding: 72px 0; border-top: 1px solid var(--border); }
+  .section-head { display: grid; grid-template-columns: 240px 1fr; gap: 40px; }
+  .section-head h2 { font-size: 14px; font-weight: 500; margin: 6px 0 0; color: var(--muted); font-family: "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .08em; }
+
+  /* Experience */
+  .job { padding-bottom: 40px; }
+  .job + .job { padding-top: 40px; border-top: 1px dashed var(--border); }
+  .job:last-child { padding-bottom: 0; }
+  .job-top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .job h3 { margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em; }
+  .job .dates { font-size: 13px; color: var(--muted); }
+  .job .role { color: var(--muted); margin: 2px 0 16px; }
+  .job ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; max-width: 66ch; }
+  .job li::marker { color: var(--muted); }
+  .stack { margin-top: 16px; font-size: 13px; color: var(--muted); }
+
+  /* Lightbox */
+  .lightbox {
+    margin-top: 28px; border-radius: 14px; background: var(--lightbox); color: var(--lightbox-text);
+    padding: 28px; display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: center;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .lb-figs { display: flex; gap: 26px; }
+  .lb-fig { text-align: center; }
+  .lb-fig svg { width: 140px; height: auto; display: block; }
+  .lb-fig .lbl { font-size: 12.5px; color: var(--lightbox-muted); margin-top: 6px; }
+  .lb-fig .lbl b { color: var(--lightbox-text); font-weight: 500; }
+  .lb-fig.after .lbl b { color: var(--glow); }
+  .gt { fill: none; stroke: #6f7c88; stroke-width: 1.4; stroke-dasharray: 4 3; }
+  .pred { fill: none; stroke: var(--glow); stroke-width: 1.5; }
+  .ov { fill: var(--glow); fill-opacity: .28; }
+  .lb-text h4 { margin: 0 0 8px; font-size: 16px; font-weight: 600; color: #fff; }
+  .lb-text p { margin: 0 0 12px; font-size: 14px; color: var(--lightbox-muted); line-height: 1.55; }
+  .lb-text .key { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12.5px; color: var(--lightbox-muted); }
+  .lb-text .key i { display: inline-block; width: 18px; border-top: 1.5px dashed #6f7c88; vertical-align: middle; margin-right: 6px; }
+  .lb-text .key i.p { border-top: 1.5px solid var(--glow); }
+
+  /* Projects */
+  .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 8px; }
+  .project {
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    display: flex; flex-direction: column; background: var(--bg);
+    transition: transform .2s ease, border-color .2s ease;
+  }
+  .project:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--text) 30%, var(--border)); }
+  .thumb { height: 128px; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; background: var(--bg-2); }
+  .thumb svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .project .body { padding: 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .project h3 { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .project h3 .mono { font-size: 12px; font-weight: 400; color: var(--muted); }
+  .project .award { font-size: 13.5px; font-weight: 500; color: var(--accent); margin: 0; }
+  .project p { margin: 0; font-size: 15px; color: var(--muted); }
+  .project .stack { margin-top: auto; padding-top: 6px; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; }
+  .about-grid p { margin: 0 0 14px; max-width: 60ch; }
+  .facts { display: grid; gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; align-self: start; }
+  .facts div { padding: 14px 18px; display: flex; justify-content: space-between; gap: 16px; }
+  .facts div + div { border-top: 1px solid var(--border); }
+  .facts span { color: var(--muted); font-size: 14px; }
+  .facts b { font-weight: 500; font-size: 15px; text-align: right; }
+
+  .lead-title { margin: 0; font-size: 21px; font-weight: 600; letter-spacing: -0.02em; }
+  .lead-role { color: var(--muted); margin: 2px 0 14px !important; }
+  .hobbies { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .hobby { margin: 0; }
+  .ph { position: relative; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 10px; overflow: hidden; background: var(--bg-2); border: 1px solid var(--border); }
+  .ph svg, .ph img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ph img { object-fit: cover; }
+  .hobby figcaption { margin-top: 10px; display: grid; gap: 2px; }
+  .hobby figcaption b { font-weight: 600; font-size: 15px; }
+  .hobby figcaption span { font-size: 13.5px; color: var(--muted); line-height: 1.4; }
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .skills h3 { font-size: 14px; font-weight: 600; margin: 0 0 8px; }
+  .skills p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--border); padding: 80px 0 48px; }
+  footer h2 { font-size: clamp(30px, 4.5vw, 44px); letter-spacing: -0.035em; font-weight: 600; margin: 0 0 12px; line-height: 1.1; }
+  footer p { color: var(--muted); margin: 0 0 28px; }
+  .fine { margin-top: 64px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+
+  #copied { font-size: 13px; color: var(--accent); align-self: center; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; gap: 36px; padding: 56px 0 56px; }
+    .section-head { grid-template-columns: 1fr; gap: 20px; }
+    .projects { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
+    .hobbies { grid-template-columns: 1fr 1fr; }
+    .skills { grid-template-columns: 1fr; gap: 20px; }
+    .lightbox { grid-template-columns: 1fr; }
+    nav.links a:not(.btn) { display: none; }
+  }
+  @media (max-width: 420px) {
+    .lb-fig svg { width: 115px; }
+    .lb-figs { gap: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .project { transition: none; }
+    .project:hover { transform: none; }
+  }
 </style>
 </head>
 <body>
 
-<h1>Roxana Stanescu</h1>
-<p class="sub">Computer science at the University of Washington, Seattle</p>
-<p class="links">
-  <a href="mailto:rstanz@uw.edu">rstanz@uw.edu</a>
-  <a href="https://www.linkedin.com/in/roxana--stanescu">LinkedIn</a>
-  <a href="https://github.com/roxana-stanescu">GitHub</a>
-  <a href="Roxana_Stanescu_Resume.pdf">Resume (PDF)</a>
-</p>
+<header class="top">
+  <div class="container">
+    <a class="brand" href="#">Roxana Stanescu</a>
+    <nav class="links" aria-label="Main">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#hobbies">Hobbies</a>
+      <a class="btn" href="Roxana_Stanescu_Resume.pdf">Resume</a>
+    </nav>
+  </div>
+</header>
 
-<p>I'm a sophomore in the Paul G. Allen School at UW. This fall I'm a software engineering co-op at Chewy, working on the systems behind inbound supply chain. Since 2023 I've also done machine learning research in the radiology department at Seattle Children's Hospital.</p>
-<p>I'm looking for software engineering internships. The best way to reach me is email.</p>
+<main class="container">
 
-<h2>Experience</h2>
-
-<div class="entry">
-  <div class="entry-head"><h3>Chewy</h3><span class="date">Jun – Dec 2026</span></div>
-  <p class="where">Software Engineering Co-op, Inbound Technology &amp; Supply Chain</p>
-  <p>Chewy sends chargeback notices to vendors, and once one goes out it can't be pulled back. I built a simulation feature (Java/Spring Boot, React) that renders each generated notice for stakeholders to review before it sends, and designed the PostgreSQL tables that track a chargeback through the whole workflow, which gave compliance an audit trail they didn't have before.</p>
-  <p>I also led moving our chargeback email orchestration onto Chewy's central notification platform, with scheduling on AWS EventBridge. Onboarding a new compliance client went from three weeks to one.</p>
-</div>
-
-<div class="entry">
-  <div class="entry-head"><h3>Seattle Children's Hospital</h3><span class="date">Sep 2023 – present</span></div>
-  <p class="where">Undergraduate ML Researcher, Department of Radiology</p>
-  <p>I build segmentation models that measure stool burden in pediatric abdominal X-rays. I wrote the PyTorch preprocessing, training and evaluation pipeline and benchmarked UNet++ and EfficientNet models on 735 annotated images. Resolution scaling and ensembling raised validation Dice from 0.32 to 0.67. Across 889 cases, the model's output correlates with radiologists' Leech and Likert ratings (Pearson r = 0.61–0.64, p &lt; 0.001). The model runs as a Gradio demo on Hugging Face.</p>
-  <figure>
-    <div class="pair">
-      <div>
-        <svg viewBox="0 0 130 100" role="img" aria-label="Overlap at Dice 0.32">
-          <defs><clipPath id="a"><circle cx="42.36" cy="50" r="40"/></clipPath></defs>
-          <circle class="ov" cx="87.64" cy="50" r="40" clip-path="url(#a)"/>
-          <circle class="gt" cx="42.36" cy="50" r="40"/>
-          <circle class="pred" cx="87.64" cy="50" r="40"/>
-        </svg>
-        Dice 0.32
-      </div>
-      <div>
-        <svg viewBox="0 0 130 100" role="img" aria-label="Overlap at Dice 0.67">
-          <defs><clipPath id="b"><circle cx="54.51" cy="50" r="40"/></clipPath></defs>
-          <circle class="ov" cx="75.49" cy="50" r="40" clip-path="url(#b)"/>
-          <circle class="gt" cx="54.51" cy="50" r="40"/>
-          <circle class="pred" cx="75.49" cy="50" r="40"/>
-        </svg>
-        Dice 0.67
+  <div class="hero">
+    <div>
+      <h1>Roxana Stanescu</h1>
+      <p class="tagline">Software engineer and ML researcher · CS at UW</p>
+      <p class="intro">I'm a sophomore at the Paul G. Allen School. I build <strong>backend systems for Chewy's supply chain</strong> and <strong>segmentation models for pediatric radiology</strong> at Seattle Children's Hospital. I'm looking for software engineering internships.</p>
+      <div class="cta">
+        <button class="btn dark" id="email" type="button">rstanz@uw.edu</button>
+        <a class="btn" href="https://www.linkedin.com/in/roxana--stanescu" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="https://github.com/roxana-stanescu" target="_blank" rel="noopener">GitHub ↗</a>
+        <span id="copied" aria-live="polite"></span>
       </div>
     </div>
-    <figcaption>What that improvement means: radiologist annotation (dashed) vs. model prediction (solid), with the shaded overlap drawn to scale for each score.</figcaption>
-  </figure>
-</div>
+    <aside class="now" aria-label="Currently">
+      <h2>Currently</h2>
+      <ul>
+        <li><b>Software Engineering Co-op, Chewy</b><span>Inbound Technology &amp; Supply Chain · through Dec 2026</span></li>
+        <li><b>ML Researcher, Seattle Children's</b><span>Department of Radiology · since 2023</span></li>
+        <li><b>B.S. Computer Science, UW</b><span>GPA 3.9 · graduating June 2028</span></li>
+      </ul>
+    </aside>
+  </div>
 
-<h2>Projects</h2>
-<ul class="projects">
-  <li>
-    <div class="entry-head"><h3>PAWS</h3><span class="date">Jul 2026</span></div>
-    A Next.js app that uses an LLM to recommend products from a customer's purchase history. <span class="note">2nd place in the Chewy AI Hackathon intern cohort; presented to 200+ people, including the org's VP.</span>
-  </li>
-  <li>
-    <div class="entry-head"><h3>Spendify</h3><span class="date">Oct 2025</span></div>
-    A budgeting app for students, built inside Jira with Atlassian Forge, React and Node.js. It categorizes expenses, charts monthly spending, and has a Rovo AI chatbot that reads your spending history and suggests where to cut back. <span class="note">2nd of 40+ teams in the Atlassian track at DubHacks 2025.</span>
-  </li>
-  <li>
-    <div class="entry-head"><h3>NOMM</h3><span class="date">Jan – Jun 2025</span></div>
-    A Flutter app for finding and reviewing restaurants with friends: groups, star ratings, and photo reviews pinned on a map. Firestore and Firebase Auth handle real-time sync for 1,000+ concurrent users.
-  </li>
-</ul>
+  <section id="experience">
+    <div class="section-head">
+      <h2>Experience</h2>
+      <div>
+        <article class="job">
+          <div class="job-top"><h3>Chewy</h3><span class="dates mono">Jun 2026 – Dec 2026</span></div>
+          <p class="role">Software Engineering Co-op · Bellevue, WA</p>
+          <ul>
+            <li>Built a chargeback email simulation feature that renders each generated notice for stakeholder review before it sends, catching errors before they reach vendors.</li>
+            <li>Designed PostgreSQL tables that track chargebacks end to end, giving compliance a full audit trail for the first time.</li>
+            <li>Led the migration of chargeback email orchestration to Chewy's central notification platform and moved scheduling onto AWS EventBridge. Onboarding for new compliance clients dropped from 3 weeks to 1.</li>
+          </ul>
+          <p class="stack mono">Java · Spring Boot · React · PostgreSQL · AWS EventBridge</p>
+        </article>
 
-<h2>Outside of work</h2>
-<p>In 2020 I started the <strong>Forgotten Faces Foundation</strong>, a student-led nonprofit for children in rural Romania. We've raised over $20,000, and with a team of 20+ volunteers we send clothing, school supplies and educational trips to more than 200 kids a year. The work earned national awards from the Romanian American Cultural Society in 2023 and 2024. I'm fluent in Romanian and hold the Washington State Seal of Biliteracy.</p>
-<p>I'm also an assistant tennis coach at Pine Lake Athletic Club. Otherwise I'm usually hiking, reading, or baking something.</p>
+        <article class="job">
+          <div class="job-top"><h3>Seattle Children's Hospital</h3><span class="dates mono">Sep 2023 – Present</span></div>
+          <p class="role">Undergraduate ML Researcher, Department of Radiology · Seattle, WA</p>
+          <ul>
+            <li>Built PyTorch segmentation pipelines that detect stool burden in pediatric abdominal X-rays, benchmarking UNet++ and EfficientNet on 735 annotated images.</li>
+            <li>Raised validation Dice from 0.32 to 0.70 with resolution scaling and ensembling.</li>
+            <li>Correlated model output with radiologists' Leech and Likert ratings on 889 cases (Pearson r = 0.61–0.64, p &lt; 0.001) and deployed the model as a Gradio demo on Hugging Face.</li>
+          </ul>
+          <div class="lightbox">
+            <div class="lb-figs">
+              <div class="lb-fig">
+                <svg viewBox="0 0 130 100" role="img" aria-label="Mask overlap at Dice 0.32">
+                  <defs><clipPath id="ca"><circle cx="42.36" cy="50" r="40"/></clipPath></defs>
+                  <circle class="ov" cx="87.64" cy="50" r="40" clip-path="url(#ca)"/>
+                  <circle class="gt" cx="42.36" cy="50" r="40"/>
+                  <circle class="pred" cx="87.64" cy="50" r="40"/>
+                </svg>
+                <div class="lbl mono">Dice <b>0.32</b></div>
+              </div>
+              <div class="lb-fig after">
+                <svg viewBox="0 0 130 100" role="img" aria-label="Mask overlap at Dice 0.70">
+                  <defs><clipPath id="cb"><circle cx="55.48" cy="50" r="40"/></clipPath></defs>
+                  <circle class="ov" cx="74.52" cy="50" r="40" clip-path="url(#cb)"/>
+                  <circle class="gt" cx="55.48" cy="50" r="40"/>
+                  <circle class="pred" cx="74.52" cy="50" r="40"/>
+                </svg>
+                <div class="lbl mono">Dice <b>0.70</b></div>
+              </div>
+            </div>
+            <div class="lb-text">
+              <h4>What a Dice jump from 0.32 to 0.70 looks like</h4>
+              <p>Dice measures how much the model's mask overlaps the radiologist's. Each pair is drawn so the shaded overlap matches the score.</p>
+              <div class="key"><span><i></i>Radiologist annotation</span><span><i class="p"></i>Model prediction</span></div>
+            </div>
+          </div>
+          <p class="stack mono">PyTorch · UNet++ · EfficientNet · DICOM · Gradio</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-<h2>Skills</h2>
-<p><strong>Languages:</strong> Java, Python, TypeScript/JavaScript, C, C#, Dart, SQL<br>
-<strong>Frameworks:</strong> Spring Boot, React, Next.js, Node.js, PyTorch, TensorFlow, .NET, Flutter<br>
-<strong>Infrastructure:</strong> AWS (Lambda, SQS, SNS, EventBridge), Azure, GCP, PostgreSQL, Firebase, Terraform, Jenkins</p>
+  <section id="projects">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <div class="projects">
+        <article class="project">
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 300 128" preserveAspectRatio="xMidYMid slice">
+              <rect x="24" y="26" width="76" height="76" rx="8" fill="var(--bg)" stroke="var(--border)"/>
+              <rect x="112" y="26" width="76" height="76" rx="8" fill="var(--bg)" stroke="var(--border)"/>
+              <rect x="200" y="26" width="76" height="76" rx="8" fill="var(--bg)" stroke="var(--accent)" stroke-width="1.5"/>
+              <rect x="34" y="36" width="56" height="34" rx="4" fill="var(--bg-2)"/>
+              <rect x="122" y="36" width="56" height="34" rx="4" fill="var(--bg-2)"/>
+              <rect x="210" y="36" width="56" height="34" rx="4" fill="var(--accent)" fill-opacity=".15"/>
+              <rect x="34" y="78" width="40" height="5" rx="2.5" fill="var(--border)"/>
+              <rect x="122" y="78" width="40" height="5" rx="2.5" fill="var(--border)"/>
+              <rect x="210" y="78" width="40" height="5" rx="2.5" fill="var(--accent)" fill-opacity=".6"/>
+              <rect x="34" y="88" width="26" height="5" rx="2.5" fill="var(--border)"/>
+              <rect x="122" y="88" width="26" height="5" rx="2.5" fill="var(--border)"/>
+              <rect x="210" y="88" width="26" height="5" rx="2.5" fill="var(--accent)" fill-opacity=".35"/>
+            </svg>
+          </div>
+          <div class="body">
+            <h3>PAWS <span class="mono">Jul 2026</span></h3>
+            <p class="award">2nd place, Chewy AI Hackathon</p>
+            <p>A Next.js app that runs an LLM over a customer's purchase history to recommend products. Presented to 200+ people, including the org's VP.</p>
+            <p class="stack mono">Next.js · LLM APIs</p>
+          </div>
+        </article>
 
-<hr>
-<footer>B.S. Computer Science, University of Washington, expected June 2028. Last updated September 2026.</footer>
+        <article class="project">
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 300 128" preserveAspectRatio="xMidYMid slice">
+              <line x1="30" y1="104" x2="270" y2="104" stroke="var(--border)"/>
+              <rect x="42" y="64" width="22" height="40" rx="3" fill="var(--border)"/>
+              <rect x="80" y="44" width="22" height="60" rx="3" fill="var(--border)"/>
+              <rect x="118" y="72" width="22" height="32" rx="3" fill="var(--border)"/>
+              <rect x="156" y="30" width="22" height="74" rx="3" fill="var(--accent)" fill-opacity=".75"/>
+              <rect x="194" y="56" width="22" height="48" rx="3" fill="var(--border)"/>
+              <rect x="232" y="80" width="22" height="24" rx="3" fill="var(--border)"/>
+            </svg>
+          </div>
+          <div class="body">
+            <h3>Spendify <span class="mono">Oct 2025</span></h3>
+            <p class="award">2nd of 40+ teams, DubHacks 2025 (Atlassian track)</p>
+            <p>A student budgeting app built inside Jira with Atlassian Forge. It tracks and charts spending, and a Rovo AI chatbot suggests where to cut back.</p>
+            <p class="stack mono">Forge · React · Node.js · Rovo AI</p>
+          </div>
+        </article>
 
+        <article class="project">
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 300 128" preserveAspectRatio="xMidYMid slice">
+              <path d="M0 40 C 60 30, 90 70, 150 60 S 240 20, 300 34" fill="none" stroke="var(--border)" stroke-width="6"/>
+              <path d="M40 128 C 70 90, 120 100, 160 70 S 230 60, 260 0" fill="none" stroke="var(--border)" stroke-width="6"/>
+              <path d="M0 96 L 300 88" fill="none" stroke="var(--border)" stroke-width="3"/>
+              <g fill="var(--accent)">
+                <path d="M92 70 a10 10 0 1 1 20 0 c0 8 -10 18 -10 18 s-10 -10 -10 -18z"/>
+                <path d="M188 46 a10 10 0 1 1 20 0 c0 8 -10 18 -10 18 s-10 -10 -10 -18z" fill-opacity=".55"/>
+                <path d="M236 84 a8 8 0 1 1 16 0 c0 6 -8 14 -8 14 s-8 -8 -8 -14z" fill-opacity=".35"/>
+              </g>
+            </svg>
+          </div>
+          <div class="body">
+            <h3>NOMM <span class="mono">2025</span></h3>
+            <p class="award">Full-stack mobile app</p>
+            <p>A social app for finding and reviewing restaurants with friends, with ratings and photo reviews on a map. Firebase handles real-time sync for 1,000+ concurrent users.</p>
+            <p class="stack mono">Flutter · Dart · Firebase</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="leadership">
+    <div class="section-head">
+      <h2>Leadership</h2>
+      <div class="about-grid">
+        <div>
+          <h3 class="lead-title">Forgotten Faces Foundation</h3>
+          <p class="lead-role">Student Leader · Sep 2020 – Present</p>
+          <p>Since 2020 I've helped lead the Forgotten Faces Foundation, a student-led nonprofit for children in rural Romania. I manage fundraising and logistics with a team of 20+ volunteers, and each year we deliver clothing, school supplies and educational trips to more than 200 kids. The work received national awards from the Romanian American Cultural Society in 2023 and 2024.</p>
+        </div>
+        <div class="facts">
+          <div><span>Raised</span><b>$20,000+</b></div>
+          <div><span>Children reached each year</span><b>200+</b></div>
+          <div><span>Volunteers</span><b>20+</b></div>
+          <div><span>Languages</span><b>English, Romanian</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hobbies">
+    <div class="section-head">
+      <h2>Outside of work</h2>
+      <div class="hobbies">
+        <figure class="hobby">
+          <div class="ph ph-ski">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 150 L70 55 L100 85 L140 30 L200 110 L200 150Z" fill="var(--border)"/><path d="M140 30 L122 55 L132 52 L140 62 L150 50 L158 55Z" fill="var(--bg)"/><path d="M60 150 Q 90 120 80 100 T 110 70" fill="none" stroke="var(--bg)" stroke-width="3" stroke-dasharray="6 5"/></svg>
+            <img src="photos/skiing.jpg" alt="Skiing" onerror="this.remove()">
+          </div>
+          <figcaption><b>Skiing</b><span>Winters in the Cascades</span></figcaption>
+        </figure>
+        <figure class="hobby">
+          <div class="ph">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="30" y="30" width="140" height="90" fill="none" stroke="var(--border)" stroke-width="3"/><line x1="100" y1="30" x2="100" y2="120" stroke="var(--border)" stroke-width="2"/><line x1="30" y1="75" x2="170" y2="75" stroke="var(--border)" stroke-width="2"/><circle cx="138" cy="52" r="9" fill="var(--accent)" fill-opacity=".7"/></svg>
+            <img src="photos/tennis.jpg" alt="Tennis" onerror="this.remove()">
+          </div>
+          <figcaption><b>Tennis</b><span>Assistant coach at Pine Lake Athletic Club</span></figcaption>
+        </figure>
+        <figure class="hobby">
+          <div class="ph">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 150 L50 80 L80 110 L130 45 L200 130 L200 150Z" fill="var(--border)"/><path d="M20 150 C 60 130, 70 115, 95 112 S 130 90, 128 60" fill="none" stroke="var(--accent)" stroke-opacity=".7" stroke-width="2.5" stroke-dasharray="4 4"/><circle cx="128" cy="56" r="4" fill="var(--accent)"/></svg>
+            <img src="photos/hiking.jpg" alt="Hiking" onerror="this.remove()">
+          </div>
+          <figcaption><b>Hiking</b><span>Usually somewhere around Seattle</span></figcaption>
+        </figure>
+        <figure class="hobby">
+          <div class="ph">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="52" y="40" width="22" height="80" rx="2" fill="var(--border)"/><rect x="78" y="30" width="18" height="90" rx="2" fill="var(--border)"/><rect x="100" y="48" width="26" height="72" rx="2" fill="var(--accent)" fill-opacity=".55"/><rect x="130" y="36" width="16" height="84" rx="2" fill="var(--border)" transform="rotate(8 138 120)"/><line x1="40" y1="121" x2="165" y2="121" stroke="var(--muted)" stroke-width="2"/></svg>
+            <img src="photos/reading.jpg" alt="Reading" onerror="this.remove()">
+          </div>
+          <figcaption><b>Reading</b><span>Always partway through a book</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div><h3>Languages</h3><p>Java, Python, TypeScript, JavaScript, C, C#, Dart, SQL</p></div>
+        <div><h3>Frameworks</h3><p>Spring Boot, React, Next.js, Node.js, PyTorch, TensorFlow, .NET, Flutter</p></div>
+        <div><h3>Cloud &amp; data</h3><p>AWS (Lambda, SQS, SNS, EventBridge), Azure, GCP, PostgreSQL, Firebase, Terraform, Jenkins</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <h2>Want to work together?</h2>
+    <p>I'm looking for software engineering internships. Email is the fastest way to reach me.</p>
+    <div class="cta">
+      <a class="btn dark" href="mailto:rstanz@uw.edu">Email me</a>
+      <a class="btn" href="Roxana_Stanescu_Resume.pdf">Download resume</a>
+    </div>
+    <div class="fine"><span>© 2026 Roxana Stanescu</span><span>Seattle, WA</span></div>
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var b = document.getElementById('email'), out = document.getElementById('copied');
+    b.addEventListener('click', function () {
+      var done = function (m) { out.textContent = m; setTimeout(function () { out.textContent = ''; }, 2200); };
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText('rstanz@uw.edu').then(function () { done('Email copied'); },
+          function () { location.href = 'mailto:rstanz@uw.edu'; });
+      } else { location.href = 'mailto:rstanz@uw.edu'; }
+    });
+  })();
+</script>
 </body>
 </html>
