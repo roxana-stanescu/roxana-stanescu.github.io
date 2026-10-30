@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Roxana Stanescu</title>
 <meta name="description" content="Roxana Stanescu, computer science student at the University of Washington. Software engineering at Chewy, machine learning research at Seattle Children's Hospital.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://roxana-stanescu.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://roxana-stanescu.github.io/">
+<meta property="og:title" content="Roxana Stanescu · Software engineer and ML researcher">
+<meta property="og:description" content="CS at UW. Backend systems at Chewy, segmentation models for pediatric radiology at Seattle Children's. Looking for Summer 2027 SWE internships.">
+<meta property="og:image" content="https://roxana-stanescu.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
@@ -150,6 +161,28 @@
   .project p { margin: 0; font-size: 15px; color: var(--muted); }
   .project .stack { margin-top: auto; padding-top: 6px; }
 
+  /* X-ray hover: shows how each project works under the hood */
+  .xray {
+    position: absolute; inset: 0; padding: 14px 16px;
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 4px;
+    background-color: var(--lightbox); color: var(--lightbox-text);
+    background-image:
+      linear-gradient(rgba(127,212,255,.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(127,212,255,.08) 1px, transparent 1px);
+    background-size: 16px 16px;
+    font-size: 12px; line-height: 1.5;
+    opacity: 0; transition: opacity .3s ease;
+  }
+  .xray b { font-weight: 500; color: var(--glow); }
+  .xray::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -40px; height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(127,212,255,.22), transparent);
+    animation: xscan 2.6s linear infinite;
+  }
+  @keyframes xscan { to { top: 100%; } }
+  .project:hover .xray { opacity: 1; }
+  @media (hover: none) { .xray { display: none; } }
+
   /* About */
   .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; }
   .about-grid p { margin: 0 0 14px; max-width: 60ch; }
@@ -201,19 +234,21 @@
     html { scroll-behavior: auto; }
     .project { transition: none; }
     .project:hover { transform: none; }
+    .xray { transition: none; }
+    .xray::before { animation: none; display: none; }
   }
 </style>
 </head>
-<body>
+<body id="top">
 
 <header class="top">
   <div class="container">
-    <a class="brand" href="#">Roxana Stanescu</a>
+    <a class="brand" href="#top">Roxana Stanescu</a>
     <nav class="links" aria-label="Main">
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#leadership">Leadership</a>
-      <a href="#hobbies">Hobbies</a>
+      <a href="#hobbies">Outside of work</a>
       <a class="btn" href="Roxana_Stanescu_Resume.pdf">Resume</a>
     </nav>
   </div>
@@ -225,7 +260,7 @@
     <div>
       <h1>Roxana Stanescu</h1>
       <p class="tagline">Software engineer and ML researcher · CS at UW</p>
-      <p class="intro">I'm a studying computer science at the Paul G. Allen School. I build <strong>backend systems for Chewy's supply chain</strong> and <strong>segmentation models for pediatric radiology</strong> at Seattle Children's Hospital. I'm looking for software engineering internships.</p>
+      <p class="intro">I'm studying computer science at the Paul G. Allen School. I build <strong>backend systems for Chewy's supply chain</strong> and <strong>segmentation models for pediatric radiology</strong> at Seattle Children's Hospital. I'm looking for Summer 2027 software engineering internships.</p>
       <div class="cta">
         <button class="btn dark" id="email" type="button">rstanz@uw.edu</button>
         <a class="btn" href="https://www.linkedin.com/in/roxana--stanescu" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -238,6 +273,7 @@
       <ul>
         <li><b>Software Engineering Co-op, Chewy</b><span>Inbound Technology &amp; Supply Chain · through Dec 2026</span></li>
         <li><b>ML Researcher, Seattle Children's</b><span>Department of Radiology · since 2023</span></li>
+        <li><b>VR Researcher, Kojima Lab</b><span>Eye movements in vestibular dysfunction · starting Jan 2027</span></li>
         <li><b>B.S. Computer Science, UW</b><span>GPA 3.9 · graduating June 2028</span></li>
       </ul>
     </aside>
@@ -303,6 +339,25 @@
     <div class="section-head">
       <h2>Projects</h2>
       <div class="projects">
+        <!-- DubHacks 2026 winner: fill in and uncomment to make it the first card.
+        <article class="project">
+          <div class="thumb" aria-hidden="true">
+            <svg viewBox="0 0 300 128" preserveAspectRatio="xMidYMid slice">
+              <path d="M126 30h48v28c0 16-11 26-24 26s-24-10-24-26z" fill="var(--accent)" fill-opacity=".15" stroke="var(--accent)" stroke-width="1.5"/>
+              <path d="M126 38h-14c0 16 8 22 18 24M174 38h14c0 16-8 22-18 24" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+              <rect x="144" y="84" width="12" height="12" fill="var(--border)"/>
+              <rect x="128" y="96" width="44" height="10" rx="3" fill="var(--border)"/>
+            </svg>
+            <div class="xray mono"><b>// under the hood</b><span>PIPELINE → IN → ARROWS</span></div>
+          </div>
+          <div class="body">
+            <h3>PROJECT NAME <span class="mono">Oct 2026</span></h3>
+            <p class="award">AWARD, DubHacks 2026</p>
+            <p>ONE OR TWO SENTENCES: what it does and what you built.</p>
+            <p class="stack mono">STACK · STACK · STACK</p>
+          </div>
+        </article>
+        -->
         <article class="project">
           <div class="thumb" aria-hidden="true">
             <svg viewBox="0 0 300 128" preserveAspectRatio="xMidYMid slice">
@@ -319,6 +374,7 @@
               <rect x="122" y="88" width="26" height="5" rx="2.5" fill="var(--border)"/>
               <rect x="210" y="88" width="26" height="5" rx="2.5" fill="var(--accent)" fill-opacity=".35"/>
             </svg>
+            <div class="xray mono"><b>// under the hood</b><span>purchase history → prompt → LLM → ranked recommendations</span></div>
           </div>
           <div class="body">
             <h3>PAWS <span class="mono">Jul 2026</span></h3>
@@ -339,6 +395,7 @@
               <rect x="194" y="56" width="22" height="48" rx="3" fill="var(--border)"/>
               <rect x="232" y="80" width="22" height="24" rx="3" fill="var(--border)"/>
             </svg>
+            <div class="xray mono"><b>// under the hood</b><span>Jira data → Forge app → spending charts + Rovo AI chat</span></div>
           </div>
           <div class="body">
             <h3>Spendify <span class="mono">Oct 2025</span></h3>
@@ -360,6 +417,7 @@
                 <path d="M236 84 a8 8 0 1 1 16 0 c0 6 -8 14 -8 14 s-8 -8 -8 -14z" fill-opacity=".35"/>
               </g>
             </svg>
+            <div class="xray mono"><b>// under the hood</b><span>Flutter client ⇄ Firebase real-time sync → map + reviews</span></div>
           </div>
           <div class="body">
             <h3>NOMM <span class="mono">2025</span></h3>
@@ -385,7 +443,7 @@
           <div><span>Raised</span><b>$20,000+</b></div>
           <div><span>Children reached each year</span><b>200+</b></div>
           <div><span>Volunteers</span><b>20+</b></div>
-          <div><span>Languages</span><b>English, Romanian</b></div>
+          <div><span>Languages spoken</span><b>English, Romanian</b></div>
         </div>
       </div>
     </div>
@@ -440,7 +498,7 @@
 
   <footer>
     <h2>Want to work together?</h2>
-    <p>I'm looking for software engineering internships. Email is the fastest way to reach me.</p>
+    <p>I'm looking for Summer 2027 software engineering internships. Email is the fastest way to reach me.</p>
     <div class="cta">
       <a class="btn dark" href="mailto:rstanz@uw.edu">Email me</a>
       <a class="btn" href="Roxana_Stanescu_Resume.pdf">Download resume</a>
